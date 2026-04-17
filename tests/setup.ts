@@ -1,4 +1,1 @@
-import { vi } from 'vitest'
-
-// Silence Prisma logs during tests
-process.env.NODE_ENV = 'test'
+import '@testing-library/jest-dom'
