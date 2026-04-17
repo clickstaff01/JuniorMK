@@ -28,11 +28,13 @@ model User {
   email           String     @unique
   nameTh          String
   nameEn          String?
-  passwordHash    String?
-  role            Role       @default(STAFF)
-  status          UserStatus @default(INVITED)
-  preferredLocale String     @default("th")
-  mentorId        String?
+  passwordHash       String?
+  role               Role       @default(STAFF)
+  status             UserStatus @default(INVITED)
+  preferredLocale    String     @default("th")
+  failedLoginCount   Int        @default(0)
+  lockedUntil        DateTime?
+  mentorId           String?
   mentor          User?      @relation("Mentorship", fields: [mentorId], references: [id])
   mentees         User[]     @relation("Mentorship")
   createdAt       DateTime   @default(now())
