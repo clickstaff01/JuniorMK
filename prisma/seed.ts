@@ -1,6 +1,6 @@
 /**
  * Seed script — Phase 1 will populate this with real content.
- * Run: pnpm db:seed
+ * Run: npm run db:seed
  */
 import { prisma } from '@/lib/db/prisma'
 
