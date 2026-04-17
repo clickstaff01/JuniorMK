@@ -1,0 +1,89 @@
+{
+  "common": {
+    "hello": "Hello",
+    "save": "Save",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "search": "Search",
+    "noData": "No data",
+    "required": "Required",
+    "optional": "Optional",
+    "edit": "Edit",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "close": "Close",
+    "or": "or",
+    "and": "and",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "auth": {
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "signUp": "Sign up",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot password?",
+    "resetPassword": "Reset password",
+    "setPassword": "Set password",
+    "invalidCredentials": "Invalid email or password",
+    "accountLocked": "Account temporarily locked. Please try again in 15 minutes.",
+    "sessionExpired": "Your session has expired. Please sign in again."
+  },
+  "learn": {
+    "week": "Week",
+    "lesson": "Lesson",
+    "completed": "Completed",
+    "inProgress": "In progress",
+    "notStarted": "Not started",
+    "markAsRead": "Mark as read",
+    "translationMissing": "ยังไม่มีคำแปล / Translation not available yet"
+  },
+  "assignments": {
+    "assignment": "Assignment",
+    "dueOn": "Due {date}",
+    "draftSaved": "Draft saved",
+    "submitConfirm": "Submit this assignment? You won't be able to edit it until it's returned by your manager.",
+    "draft": "Draft",
+    "submitted": "Submitted",
+    "graded": "Graded",
+    "needsRework": "Needs rework",
+    "approved": "Approved"
+  },
+  "manage": {
+    "queue": "Review queue",
+    "grading": "Grade",
+    "rubric": "Rubric",
+    "great": "Great",
+    "ok": "OK",
+    "rework": "Needs rework",
+    "overallStatus": "Overall result",
+    "managerSummary": "Manager comment",
+    "approve": "Approve",
+    "sendRework": "Send back for rework"
+  },
+  "admin": {
+    "users": "Users",
+    "courses": "Courses",
+    "audit": "Audit log",
+    "analytics": "Analytics",
+    "inviteUser": "Invite user",
+    "bulkInvite": "Bulk invite (CSV)",
+    "newCourse": "New course"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "learn": "Learn",
+    "assignments": "Assignments",
+    "notifications": "Notifications",
+    "profile": "Profile",
+    "settings": "Settings",
+    "language": "Language"
+  }
+}

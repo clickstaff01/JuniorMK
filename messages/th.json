@@ -1,0 +1,89 @@
+{
+  "common": {
+    "hello": "สวัสดี",
+    "save": "บันทึก",
+    "cancel": "ยกเลิก",
+    "submit": "ส่ง",
+    "loading": "กำลังโหลด...",
+    "error": "เกิดข้อผิดพลาด",
+    "success": "สำเร็จ",
+    "back": "กลับ",
+    "next": "ถัดไป",
+    "previous": "ก่อนหน้า",
+    "search": "ค้นหา",
+    "noData": "ไม่มีข้อมูล",
+    "required": "จำเป็น",
+    "optional": "ไม่บังคับ",
+    "edit": "แก้ไข",
+    "delete": "ลบ",
+    "confirm": "ยืนยัน",
+    "close": "ปิด",
+    "or": "หรือ",
+    "and": "และ",
+    "yes": "ใช่",
+    "no": "ไม่"
+  },
+  "auth": {
+    "signIn": "เข้าสู่ระบบ",
+    "signOut": "ออกจากระบบ",
+    "signUp": "สมัครสมาชิก",
+    "email": "อีเมล",
+    "password": "รหัสผ่าน",
+    "forgotPassword": "ลืมรหัสผ่าน?",
+    "resetPassword": "รีเซ็ตรหัสผ่าน",
+    "setPassword": "ตั้งรหัสผ่าน",
+    "invalidCredentials": "อีเมลหรือรหัสผ่านไม่ถูกต้อง",
+    "accountLocked": "บัญชีถูกระงับชั่วคราว กรุณาลองใหม่ใน 15 นาที",
+    "sessionExpired": "เซสชันหมดอายุ กรุณาเข้าสู่ระบบใหม่"
+  },
+  "learn": {
+    "week": "สัปดาห์",
+    "lesson": "บทเรียน",
+    "completed": "เสร็จสิ้น",
+    "inProgress": "กำลังเรียน",
+    "notStarted": "ยังไม่เริ่ม",
+    "markAsRead": "ทำเครื่องหมายว่าอ่านแล้ว",
+    "translationMissing": "ยังไม่มีคำแปล / Translation not available yet"
+  },
+  "assignments": {
+    "assignment": "งาน",
+    "dueOn": "ครบกำหนด {date}",
+    "draftSaved": "บันทึกฉบับร่างแล้ว",
+    "submitConfirm": "ยืนยันการส่งงาน? เมื่อส่งแล้วไม่สามารถแก้ไขได้จนกว่าผู้ตรวจจะส่งคืน",
+    "draft": "ฉบับร่าง",
+    "submitted": "ส่งแล้ว",
+    "graded": "ตรวจแล้ว",
+    "needsRework": "ต้องแก้ไข",
+    "approved": "ผ่าน"
+  },
+  "manage": {
+    "queue": "คิวรอตรวจ",
+    "grading": "ให้คะแนน",
+    "rubric": "เกณฑ์การให้คะแนน",
+    "great": "ดีมาก",
+    "ok": "ผ่าน",
+    "rework": "ต้องแก้ไข",
+    "overallStatus": "ผลการตรวจ",
+    "managerSummary": "ความเห็นของผู้ตรวจ",
+    "approve": "อนุมัติ",
+    "sendRework": "ส่งคืนให้แก้ไข"
+  },
+  "admin": {
+    "users": "ผู้ใช้งาน",
+    "courses": "หลักสูตร",
+    "audit": "บันทึกการดำเนินการ",
+    "analytics": "สถิติ",
+    "inviteUser": "เชิญผู้ใช้",
+    "bulkInvite": "เชิญหลายคน (CSV)",
+    "newCourse": "สร้างหลักสูตรใหม่"
+  },
+  "nav": {
+    "dashboard": "แดชบอร์ด",
+    "learn": "เรียน",
+    "assignments": "งาน",
+    "notifications": "การแจ้งเตือน",
+    "profile": "โปรไฟล์",
+    "settings": "ตั้งค่า",
+    "language": "ภาษา"
+  }
+}

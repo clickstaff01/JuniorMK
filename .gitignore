@@ -1,0 +1,31 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# build output
+.next/
+dist/
+out/
+
+# env files — never commit secrets
+.env
+.env.local
+.env.*.local
+
+# database files
+*.db
+*.db-journal
+dev.db
+
+# testing
+coverage/
+playwright-report/
+test-results/
+
+# OS / editor
+.DS_Store
+*.pem
+.vscode/settings.json
+
+# pnpm
+pnpm-debug.log
