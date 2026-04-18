@@ -1,7 +1,12 @@
 import { useTranslations } from 'next-intl'
+import { setRequestLocale } from 'next-intl/server'
 import { Link } from '@/lib/i18n/navigation'
 
-export default function HomePage() {
+type Props = { params: { locale: string } }
+
+export default function HomePage({ params: { locale } }: Props) {
+  setRequestLocale(locale)
+
   const t = useTranslations('common')
   const tNav = useTranslations('nav')
 
