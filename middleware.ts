@@ -1,8 +1,10 @@
-import NextAuth from 'next-auth'
-import { authConfig } from './auth.config'
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
 
-export default NextAuth(authConfig).auth
+export function middleware(_req: NextRequest) {
+  return NextResponse.next()
+}
 
 export const config = {
-  matcher: ['/((?!_next|_vercel|.*\\..*).*)'],
+  matcher: [],
 }
