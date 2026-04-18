@@ -3,7 +3,7 @@ import Credentials from 'next-auth/providers/credentials'
 import bcrypt from 'bcryptjs'
 import { z } from 'zod'
 import { prisma } from '@/lib/db/prisma'
-import type { Role } from '@prisma/client'
+import { authConfig } from './auth.config'
 
 const credentialsSchema = z.object({
   email: z.string().email(),
@@ -11,10 +11,7 @@ const credentialsSchema = z.object({
 })
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  session: { strategy: 'jwt' },
-  pages: {
-    signIn: '/th/auth/sign-in',
-  },
+  ...authConfig,
   providers: [
     Credentials({
       authorize: async (credentials) => {
@@ -25,7 +22,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         const user = await prisma.user.findUnique({ where: { email } })
 
         if (!user || !user.passwordHash) return null
-
         if (user.lockedUntil && user.lockedUntil > new Date()) return null
         if (user.status === 'DEACTIVATED') return null
         if (user.status === 'INVITED') return null
@@ -55,18 +51,4 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       },
     }),
   ],
-  callbacks: {
-    jwt({ token, user }) {
-      if (user) {
-        token.id = user.id
-        token.role = (user as { id: string; role: Role }).role
-      }
-      return token
-    },
-    session({ session, token }) {
-      session.user.id = token.id as string
-      session.user.role = token.role as Role
-      return session
-    },
-  },
 })
