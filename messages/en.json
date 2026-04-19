@@ -21,7 +21,8 @@
     "or": "or",
     "and": "and",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "comingSoon": "Coming soon"
   },
   "auth": {
     "signIn": "Sign in",
@@ -80,10 +81,22 @@
   "nav": {
     "dashboard": "Dashboard",
     "learn": "Learn",
+    "myCourse": "My Course",
+    "mySubmissions": "My Submissions",
+    "queue": "Review Queue",
+    "myMentees": "My Mentees",
+    "feedbackSnippets": "Feedback Snippets",
+    "courses": "Courses",
+    "users": "Users",
+    "audit": "Audit Log",
+    "analytics": "Analytics",
     "assignments": "Assignments",
     "notifications": "Notifications",
     "profile": "Profile",
     "settings": "Settings",
-    "language": "Language"
+    "language": "Language",
+    "signOut": "Sign out",
+    "thai": "ไทย",
+    "english": "English"
   }
 }

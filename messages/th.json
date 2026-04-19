@@ -21,7 +21,8 @@
     "or": "หรือ",
     "and": "และ",
     "yes": "ใช่",
-    "no": "ไม่"
+    "no": "ไม่",
+    "comingSoon": "กำลังพัฒนา"
   },
   "auth": {
     "signIn": "เข้าสู่ระบบ",
@@ -80,10 +81,22 @@
   "nav": {
     "dashboard": "แดชบอร์ด",
     "learn": "เรียน",
+    "myCourse": "หลักสูตรของฉัน",
+    "mySubmissions": "งานของฉัน",
+    "queue": "คิวรอตรวจ",
+    "myMentees": "ผู้ใช้ในความดูแล",
+    "feedbackSnippets": "ตัวอย่างคอมเมนต์",
+    "courses": "หลักสูตร",
+    "users": "ผู้ใช้งาน",
+    "audit": "บันทึกการดำเนินการ",
+    "analytics": "สถิติ",
     "assignments": "งาน",
     "notifications": "การแจ้งเตือน",
     "profile": "โปรไฟล์",
     "settings": "ตั้งค่า",
-    "language": "ภาษา"
+    "language": "ภาษา",
+    "signOut": "ออกจากระบบ",
+    "thai": "ไทย",
+    "english": "English"
   }
 }
