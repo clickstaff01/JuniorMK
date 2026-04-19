@@ -91,6 +91,15 @@ export default function SignInPage({ params }: { params: { locale: string } }) {
               {loading ? 'กำลังเข้าสู่ระบบ...' : 'เข้าสู่ระบบ'}
             </button>
           </form>
+
+          <div className="mt-4 text-center">
+            <a
+              href={`/${params.locale}/auth/forgot-password`}
+              className="text-xs text-slate-500 hover:text-slate-300 transition-colors"
+            >
+              ลืมรหัสผ่าน?
+            </a>
+          </div>
         </div>
 
         <p className="mt-6 text-center text-xs text-white/30">
