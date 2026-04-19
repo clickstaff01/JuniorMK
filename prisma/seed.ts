@@ -2,13 +2,13 @@ import bcrypt from 'bcryptjs'
 import { prisma } from '@/lib/db/prisma'
 
 async function main() {
-  const passwordHash = await bcrypt.hash('Admin@2026!', 12)
+  const passwordHash = await bcrypt.hash('123456', 12)
 
   const admin = await prisma.user.upsert({
-    where: { email: 'admin@clickbroker.co.th' },
+    where: { email: 'admin@test.com' },
     update: {},
     create: {
-      email: 'admin@clickbroker.co.th',
+      email: 'admin@test.com',
       nameTh: 'ผู้ดูแลระบบ',
       nameEn: 'System Admin',
       passwordHash,
@@ -17,13 +17,12 @@ async function main() {
     },
   })
 
-  console.log(`✅ Admin user: ${admin.email}`)
-  console.log(`   Password: Admin@2026!`)
+  console.log(`✅ Seed complete: ${admin.email}`)
 }
 
 main()
   .catch((e) => {
-    console.error(e)
+    console.error('Seed failed:', e)
     process.exit(1)
   })
   .finally(async () => {
