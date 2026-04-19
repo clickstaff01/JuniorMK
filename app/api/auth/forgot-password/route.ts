@@ -20,6 +20,7 @@ export async function POST(req: NextRequest) {
     })
 
     const resetUrl = `${process.env.NEXT_PUBLIC_APP_URL ?? ''}/th/auth/set-password?token=${token}`
+    // eslint-disable-next-line no-console
     console.log(`[password-reset] Reset URL for ${user.email}: ${resetUrl}`)
   }
 

@@ -26,7 +26,7 @@ export default async function CoursesPage({ params }: { params: { locale: string
           <GraduationCap className="w-6 h-6 text-slate-500" />
         </div>
         <p className="text-white font-medium mb-1">ยังไม่มีหลักสูตร</p>
-        <p className="text-slate-500 text-sm">กดปุ่ม "สร้างหลักสูตรใหม่" เพื่อเริ่มต้น</p>
+        <p className="text-slate-500 text-sm">กดปุ่ม &quot;สร้างหลักสูตรใหม่&quot; เพื่อเริ่มต้น</p>
       </div>
     </div>
   )
