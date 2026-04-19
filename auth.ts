@@ -11,6 +11,7 @@ const credentialsSchema = z.object({
 })
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
+  trustHost: true,
   session: { strategy: 'jwt' },
   pages: {
     signIn: '/th/auth/sign-in',
@@ -18,6 +19,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
     Credentials({
       authorize: async (credentials) => {
+        try {
         const parsed = credentialsSchema.safeParse(credentials)
         if (!parsed.success) return null
 
@@ -51,6 +53,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         })
 
         return { id: user.id, email: user.email, name: user.nameTh, role: user.role }
+        } catch (err) {
+          console.error('[auth] authorize error:', err)
+          return null
+        }
       },
     }),
   ],
