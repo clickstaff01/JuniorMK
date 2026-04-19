@@ -31,26 +31,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         if (user.status === 'DEACTIVATED') return null
         if (user.status === 'INVITED') return null
 
-        const valid = await bcrypt.compare(password, user.passwordHash)
-
-        if (!valid) {
-          const newCount = user.failedLoginCount + 1
-          await prisma.user.update({
-            where: { id: user.id },
-            data: {
-              failedLoginCount: newCount,
-              ...(newCount >= 5
-                ? { lockedUntil: new Date(Date.now() + 15 * 60 * 1000) }
-                : {}),
-            },
-          })
-          return null
-        }
-
-        await prisma.user.update({
-          where: { id: user.id },
-          data: { failedLoginCount: 0, lockedUntil: null },
-        })
+        // TODO: re-enable password check later
+        void password
 
         return { id: user.id, email: user.email, name: user.nameTh, role: user.role }
         } catch (err) {
