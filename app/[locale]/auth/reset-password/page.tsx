@@ -1,6 +1,3 @@
-'use client'
-
-import { useSearchParams } from 'next/navigation'
 import SetPasswordPage from '../set-password/page'
 
 export default function ResetPasswordPage({ params }: { params: { locale: string } }) {

@@ -1,10 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { Eye, EyeOff, KeyRound } from 'lucide-react'
 
-export default function SetPasswordPage({ params }: { params: { locale: string } }) {
+function SetPasswordForm({ locale }: { locale: string }) {
   const searchParams = useSearchParams()
   const token = searchParams.get('token') ?? ''
   const router = useRouter()
@@ -27,7 +27,7 @@ export default function SetPasswordPage({ params }: { params: { locale: string }
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ token, password }),
       })
-      if (res.ok) router.push(`/${params.locale}/auth/sign-in?set=1`)
+      if (res.ok) router.push(`/${locale}/auth/sign-in?set=1`)
       else {
         const data = await res.json()
         setError(data.error ?? 'ลิงก์ไม่ถูกต้องหรือหมดอายุ')
@@ -109,5 +109,13 @@ export default function SetPasswordPage({ params }: { params: { locale: string }
         </div>
       </div>
     </div>
+  )
+}
+
+export default function SetPasswordPage({ params }: { params: { locale: string } }) {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900" />}>
+      <SetPasswordForm locale={params.locale} />
+    </Suspense>
   )
 }
