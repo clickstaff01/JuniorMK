@@ -417,3 +417,14 @@ model AuditLog {
   @@index([entity, entityId])
   @@index([actorId, createdAt])
 }
+
+// ─────────────────────────────────────────────
+// System Settings (key-value config stored in DB)
+// ─────────────────────────────────────────────
+
+model SystemSetting {
+  key       String   @id
+  value     Json
+  updatedAt DateTime @updatedAt
+  updatedBy String?
+}

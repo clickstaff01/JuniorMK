@@ -1,25 +1,51 @@
 import { auth } from '@/auth'
 import { redirect } from 'next/navigation'
-import { Settings } from 'lucide-react'
+import { prisma } from '@/lib/db/prisma'
+import { getAllSettings } from '@/lib/settings'
+import SettingsForm from './settings-form'
+
+export const dynamic = 'force-dynamic'
 
 export default async function SettingsPage({ params }: { params: { locale: string } }) {
   const session = await auth()
   if (!session) redirect(`/${params.locale}/auth/sign-in`)
 
-  return (
-    <div className="p-6 max-w-2xl">
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold text-white">ตั้งค่า</h1>
-        <p className="text-slate-400 text-sm mt-1">โปรไฟล์และการตั้งค่าบัญชี</p>
-      </div>
+  const user = await prisma.user.findUnique({
+    where: { id: session.user.id },
+    select: {
+      id: true,
+      email: true,
+      nameTh: true,
+      nameEn: true,
+      role: true,
+      status: true,
+      preferredLocale: true,
+      createdAt: true,
+      mentor: { select: { nameTh: true, email: true } },
+    },
+  })
 
-      <div className="bg-slate-900 border border-white/5 rounded-2xl p-16 text-center">
-        <div className="w-12 h-12 rounded-2xl bg-slate-800 flex items-center justify-center mx-auto mb-4">
-          <Settings className="w-6 h-6 text-slate-500" />
-        </div>
-        <p className="text-white font-medium mb-1">กำลังพัฒนา</p>
-        <p className="text-slate-500 text-sm">การตั้งค่าโปรไฟล์และรหัสผ่านจะแสดงที่นี่</p>
-      </div>
-    </div>
+  if (!user) redirect(`/${params.locale}/auth/sign-in`)
+
+  const isAdmin = user.role === 'ADMIN'
+  const systemSettings = isAdmin ? await getAllSettings() : null
+
+  return (
+    <SettingsForm
+      locale={params.locale}
+      user={{
+        id: user.id,
+        email: user.email,
+        nameTh: user.nameTh,
+        nameEn: user.nameEn,
+        role: user.role,
+        status: user.status,
+        preferredLocale: user.preferredLocale,
+        createdAt: user.createdAt.toISOString(),
+        mentor: user.mentor,
+      }}
+      isAdmin={isAdmin}
+      systemSettings={systemSettings}
+    />
   )
 }
