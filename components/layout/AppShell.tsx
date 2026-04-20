@@ -8,7 +8,7 @@ import { useTranslations } from 'next-intl'
 import {
   LayoutDashboard, BookOpen, FileText, ClipboardList,
   Users, GraduationCap, BarChart2, Shield, Settings,
-  Bell, Menu, X, LogOut,
+  BookMarked, Bell, Menu, X, LogOut,
 } from 'lucide-react'
 import type { Session } from 'next-auth'
 import type { Role } from '@prisma/client'
@@ -26,11 +26,13 @@ const NAV: Record<Role, NavItem[]> = {
     { href: '/learn', icon: BookOpen, labelKey: 'myCourse' },
     { href: '/submissions/my', icon: FileText, labelKey: 'mySubmissions' },
     { href: '/settings', icon: Settings, labelKey: 'settings' },
+    { href: '/guide', icon: BookMarked, labelKey: 'guide' },
   ],
   MANAGER: [
     { href: '/manage/queue', icon: ClipboardList, labelKey: 'queue' },
     { href: '/manage/mentees', icon: Users, labelKey: 'myMentees' },
     { href: '/settings', icon: Settings, labelKey: 'settings' },
+    { href: '/guide', icon: BookMarked, labelKey: 'guide' },
   ],
   ADMIN: [
     { href: '/admin/dashboard', icon: LayoutDashboard, labelKey: 'dashboard' },
@@ -40,6 +42,7 @@ const NAV: Record<Role, NavItem[]> = {
     { href: '/admin/audit', icon: Shield, labelKey: 'audit' },
     { href: '/admin/analytics', icon: BarChart2, labelKey: 'analytics' },
     { href: '/settings', icon: Settings, labelKey: 'settings' },
+    { href: '/guide', icon: BookMarked, labelKey: 'guide' },
   ],
 }
 
