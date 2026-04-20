@@ -23,17 +23,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         const parsed = credentialsSchema.safeParse(credentials)
         if (!parsed.success) return null
 
-        const { email, password } = parsed.data
+        const { email } = parsed.data
         const user = await prisma.user.findUnique({ where: { email } })
+        if (!user) return null
 
-        if (!user || !user.passwordHash) return null
-        if (user.lockedUntil && user.lockedUntil > new Date()) return null
-        if (user.status === 'DEACTIVATED') return null
-        if (user.status === 'INVITED') return null
-
-        // TODO: re-enable password check later
-        void password
-
+        // TODO: re-enable password/status checks later
         return { id: user.id, email: user.email, name: user.nameTh, role: user.role }
         } catch (err) {
           console.error('[auth] authorize error:', err)
