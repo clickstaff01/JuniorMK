@@ -18,6 +18,16 @@ if (!process.env.AUTH_SECRET && !process.env.NEXTAUTH_SECRET) {
 
 const googleEnabled = Boolean(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET)
 
+const allowedDomains = (process.env.AUTH_ALLOWED_DOMAINS ?? '')
+  .split(',')
+  .map((d) => d.trim().toLowerCase())
+  .filter(Boolean)
+
+function emailDomain(email: string): string {
+  const idx = email.lastIndexOf('@')
+  return idx >= 0 ? email.slice(idx + 1) : ''
+}
+
 export const { handlers, auth, signIn, signOut } = NextAuth({
   trustHost: true,
   session: { strategy: 'jwt' },
@@ -54,22 +64,58 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       : []),
   ],
   callbacks: {
-    async signIn({ user, account }) {
+    async signIn({ user, account, profile }) {
       if (account?.provider !== 'google') return true
 
       const email = user.email?.trim().toLowerCase()
       if (!email) return false
 
-      const dbUser = await prisma.user.findUnique({ where: { email } })
-      if (!dbUser) return false
-      if (dbUser.status === 'DEACTIVATED') return false
+      const existing = await prisma.user.findUnique({ where: { email } })
 
-      if (dbUser.status === 'INVITED') {
-        await prisma.user.update({
-          where: { id: dbUser.id },
-          data: { status: 'ACTIVE' },
-        })
+      if (existing) {
+        if (existing.status === 'DEACTIVATED') return false
+        if (existing.status === 'INVITED') {
+          await prisma.user.update({
+            where: { id: existing.id },
+            data: { status: 'ACTIVE' },
+          })
+        }
+        return true
       }
+
+      const domain = emailDomain(email)
+      if (allowedDomains.length === 0 || !allowedDomains.includes(domain)) {
+        return false
+      }
+
+      const displayName =
+        (profile?.name as string | undefined) ?? user.name ?? email.split('@')[0]
+
+      const created = await prisma.user.create({
+        data: {
+          email,
+          nameTh: displayName,
+          nameEn: displayName,
+          role: 'STAFF',
+          status: 'ACTIVE',
+          passwordHash: null,
+        },
+      })
+
+      await prisma.auditLog.create({
+        data: {
+          actorId: created.id,
+          action: 'CREATE',
+          entity: 'User',
+          entityId: created.id,
+          after: {
+            email: created.email,
+            role: created.role,
+            status: created.status,
+            source: 'google-auto-provision',
+          },
+        },
+      })
 
       return true
     },
