@@ -1,7 +1,7 @@
 import NextAuth from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
-import bcrypt from 'bcryptjs'
 import { z } from 'zod'
+/* eslint-disable no-console */
 import { prisma } from '@/lib/db/prisma'
 import type { Role } from '@prisma/client'
 
@@ -20,17 +20,25 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     Credentials({
       authorize: async (credentials) => {
         try {
-        const parsed = credentialsSchema.safeParse(credentials)
-        if (!parsed.success) return null
+          console.log('[auth] authorize called with:', JSON.stringify(credentials))
+          const parsed = credentialsSchema.safeParse(credentials)
+          if (!parsed.success) {
+            console.log('[auth] zod parse failed:', parsed.error.flatten())
+            return null
+          }
 
-        const { email } = parsed.data
-        const user = await prisma.user.findUnique({ where: { email } })
-        if (!user) return null
+          const email = parsed.data.email.trim().toLowerCase()
+          console.log('[auth] looking up user:', email)
+          const user = await prisma.user.findUnique({ where: { email } })
+          if (!user) {
+            console.log('[auth] user not found for email:', email)
+            return null
+          }
 
-        // TODO: re-enable password/status checks later
-        return { id: user.id, email: user.email, name: user.nameTh, role: user.role }
+          console.log('[auth] login success:', user.email, user.role)
+          return { id: user.id, email: user.email, name: user.nameTh, role: user.role }
         } catch (err) {
-          console.error('[auth] authorize error:', err)
+          console.error('[auth] authorize threw error:', err)
           return null
         }
       },
